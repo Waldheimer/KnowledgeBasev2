@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KnowledgeBasev2.Infrastructure.ContractImplementations
 {
-    internal class KBCommandRepo : IKbCommand
+    public class KBCommandRepo : IKbCommand
     {
         private readonly RemoteDbContext context;
 
