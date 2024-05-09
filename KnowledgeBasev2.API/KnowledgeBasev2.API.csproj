@@ -16,4 +16,8 @@
 	  </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\KnowledgeBasev2.Infrastructure\KnowledgeBasev2.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
