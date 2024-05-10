@@ -3,8 +3,8 @@ using KnowledgeBasev2.Infrastructure.Data;
 using KnowledgeBasev2.Infrastructure.ContractImplementations;
 using Microsoft.EntityFrameworkCore;
 using KnowledgeBasev2.Infrastructure.Handler.CommandHandler;
-using KnowledgeBasev2.Application.Queries;
-using KnowledgeBasev2.Application.Commands;
+using KnowledgeBasev2.Application.Commands.CmdCommands;
+using KnowledgeBasev2.Application.Queries.CommandQueries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +24,6 @@ builder.Services.AddScoped<KBCommandRepo>();
 
 builder.Services.AddMediatR(config => {
     config.RegisterServicesFromAssemblies(typeof(GetCommandListQueryHandler).Assembly, typeof(GetCommandsListQuery).Assembly);
-    //config.RegisterServicesFromAssembly(typeof(GetCommandsListQuery).Assembly);
     config.RegisterServicesFromAssemblies(typeof(CreateNewCmdCommandHandler).Assembly, typeof(CreateNewCmdCommand).Assembly);
     });
 

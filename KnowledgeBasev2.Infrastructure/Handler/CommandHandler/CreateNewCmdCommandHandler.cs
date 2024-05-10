@@ -1,4 +1,4 @@
-﻿using KnowledgeBasev2.Application.Commands;
+﻿using KnowledgeBasev2.Application.Commands.CmdCommands;
 using KnowledgeBasev2.Application.DTOs;
 using KnowledgeBasev2.Infrastructure.ContractImplementations;
 using MediatR;

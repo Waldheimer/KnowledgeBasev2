@@ -1,10 +1,8 @@
-﻿using KnowledgeBasev2.Application.Commands;
+﻿using KnowledgeBasev2.Application.Commands.CmdCommands;
 using KnowledgeBasev2.Application.DTOs;
-using KnowledgeBasev2.Application.Queries;
+using KnowledgeBasev2.Application.Queries.CommandQueries;
 using KnowledgeBasev2.Domain.DTOs;
-using KnowledgeBasev2.Infrastructure.Handler.CommandHandler;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KnowledgeBasev2.API.Controllers
