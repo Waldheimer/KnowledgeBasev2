@@ -17,7 +17,7 @@ namespace KnowledgeBasev2.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema("kb");
+            //modelBuilder.HasDefaultSchema("kb");
 
             base.OnModelCreating(modelBuilder);
         }

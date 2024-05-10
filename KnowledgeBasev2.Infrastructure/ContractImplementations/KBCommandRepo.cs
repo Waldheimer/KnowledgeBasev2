@@ -51,7 +51,7 @@ namespace KnowledgeBasev2.Infrastructure.ContractImplementations
                          from description in context.Descriptions.AsNoTracking()
                          where descriptor.Id.Equals(cmd.Descriptor) && description.Id.Equals(cmd.Descriptor)
                          select new ReadUpdateDTO(cmd, descriptor, description);
-            return await result.ToListAsync();
+            return result;
         }
 
         /// <summary>
