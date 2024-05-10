@@ -15,4 +15,11 @@
     <PackageReference Include="MediatR" Version="12.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\CodeCommands\" />
+    <Folder Include="Commands\DocumentationsCommands\" />
+    <Folder Include="Queries\CodeQueries\" />
+    <Folder Include="Queries\DocumentationQueries\" />
+  </ItemGroup>
+
 </Project>

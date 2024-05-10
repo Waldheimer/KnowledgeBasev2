@@ -21,4 +21,9 @@
     <ProjectReference Include="..\KnowledgeBasev2.Domain\KnowledgeBasev2.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Handler\CodeHandler\" />
+    <Folder Include="Handler\DocumentationHandler\" />
+  </ItemGroup>
+
 </Project>

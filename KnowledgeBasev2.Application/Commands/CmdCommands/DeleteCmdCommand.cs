@@ -1,7 +1,7 @@
 ﻿using KnowledgeBasev2.Application.DTOs;
 using MediatR;
 
-namespace KnowledgeBasev2.Application.Commands
+namespace KnowledgeBasev2.Application.Commands.CmdCommands
 {
     public class DeleteCmdCommand : IRequest<ServiceResponse<Guid>>
     {
