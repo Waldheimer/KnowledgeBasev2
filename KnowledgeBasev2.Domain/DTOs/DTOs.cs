@@ -1,4 +1,5 @@
 ﻿using KnowledgeBasev2.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace KnowledgeBasev2.Domain.DTOs
 {
@@ -12,10 +13,12 @@ namespace KnowledgeBasev2.Domain.DTOs
     }
     public class NoIdDTO : ValueDTO
     {
+        [Required]
         public string Text { get; set; } = string.Empty;
     }
     public class IdDTO : NoIdDTO
     {
+        [Required]
         public Guid Id { get; set; }
     }
     public class CreateDTO : NoIdDTO {}
