@@ -1,15 +1,15 @@
 ﻿using KnowledgeBasev2.Application.Commands.CmdCommands;
+using KnowledgeBasev2.Application.Contracts;
 using KnowledgeBasev2.Application.DTOs;
-using KnowledgeBasev2.Infrastructure.ContractImplementations;
 using MediatR;
 
 namespace KnowledgeBasev2.Infrastructure.Handler.CommandHandler
 {
     public class DeleteCmdCommandHandler : IRequestHandler<DeleteCmdCommand, ServiceResponse<Guid>>
     {
-        private readonly KBCommandRepo _repo;
+        private readonly IKbCommand _repo;
 
-        public DeleteCmdCommandHandler(KBCommandRepo repo)
+        public DeleteCmdCommandHandler(IKbCommand repo)
         {
             _repo = repo;
         }

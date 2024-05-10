@@ -1,20 +1,15 @@
-﻿using KnowledgeBasev2.Application.Queries.CommandQueries;
+﻿using KnowledgeBasev2.Application.Contracts;
+using KnowledgeBasev2.Application.Queries.CommandQueries;
 using KnowledgeBasev2.Domain.DTOs;
-using KnowledgeBasev2.Infrastructure.ContractImplementations;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KnowledgeBasev2.Infrastructure.Handler.CommandHandler
 {
     public class GetCommandByIdQueryHandler : IRequestHandler<GetCommandByIdQuery, ReadUpdateDTO>
     {
-        private readonly KBCommandRepo _repo;
+        private readonly IKbCommand _repo;
 
-        public GetCommandByIdQueryHandler(KBCommandRepo repo)
+        public GetCommandByIdQueryHandler(IKbCommand repo)
         {
             _repo = repo;
         }
