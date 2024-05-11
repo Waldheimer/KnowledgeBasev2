@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using KnowledgeBasev2.Infrastructure.Handler.CommandHandler;
 using KnowledgeBasev2.Application.Commands.CmdCommands;
 using KnowledgeBasev2.Application.Queries.CommandQueries;
+using FluentValidation;
+using KnowledgeBasev2.Infrastructure.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,8 @@ builder.Services.AddMediatR(config => {
     config.RegisterServicesFromAssemblies(typeof(GetCommandListQueryHandler).Assembly, typeof(GetCommandsListQuery).Assembly);
     config.RegisterServicesFromAssemblies(typeof(CreateNewCmdCommandHandler).Assembly, typeof(CreateNewCmdCommand).Assembly);
     });
+
+builder.Services.AddValidatorsFromAssembly(typeof(CreateNewCmdCommandValidator).Assembly);
 
 var app = builder.Build();
 

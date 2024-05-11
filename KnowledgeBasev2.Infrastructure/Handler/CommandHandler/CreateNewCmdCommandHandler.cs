@@ -14,9 +14,9 @@ namespace KnowledgeBasev2.Infrastructure.Handler.CommandHandler
             _repo = repo;
         }
 
-        public Task<ServiceResponse<Guid>> Handle(CreateNewCmdCommand request, CancellationToken cancellationToken)
+        public async Task<ServiceResponse<Guid>> Handle(CreateNewCmdCommand request, CancellationToken cancellationToken)
         {
-            return _repo.CreateAsync(request.Input);
+            return await _repo.CreateAsync(request.Input);
         }
     }
 }

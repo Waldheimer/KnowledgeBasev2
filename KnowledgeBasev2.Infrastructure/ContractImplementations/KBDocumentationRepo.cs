@@ -21,6 +21,9 @@ namespace KnowledgeBasev2.Infrastructure.ContractImplementations
             this.context = context;
         }
 
+        //-----------------------------
+        //--------- CREATE ------------
+        //-----------------------------
         /// <summary>
         /// Create a new documentation from a CreateDTO including Descriptor and Description and save them to the Database
         /// </summary>
@@ -43,7 +46,9 @@ namespace KnowledgeBasev2.Infrastructure.ContractImplementations
             }
         }
 
-
+        //-----------------------------
+        //--------- READ --------------
+        //-----------------------------
         /// <summary>
         /// Get all available documentations from the Database and returns them as ReadUpdateDTO
         /// including the data from the descriptor and description
@@ -127,7 +132,9 @@ namespace KnowledgeBasev2.Infrastructure.ContractImplementations
             return await documentations.ToListAsync();
         }
 
-
+        //-----------------------------
+        //--------- UPDATE ------------
+        //-----------------------------
         /// <summary>
         /// Update the documentation/Descriptor/Description matching the ReadUpdateDTO
         /// </summary>
@@ -154,7 +161,9 @@ namespace KnowledgeBasev2.Infrastructure.ContractImplementations
             }
         }
 
-
+        //-----------------------------
+        //--------- DELETE ------------
+        //-----------------------------
         /// <summary>
         /// Deletes the documentation/Descriptor/Description with the given id
         /// </summary>
@@ -180,6 +189,32 @@ namespace KnowledgeBasev2.Infrastructure.ContractImplementations
             }
         }
 
+        //-----------------------------
+        //--------- VALIDATION --------
+        //-----------------------------
+        public async Task<bool> IsUniqueCode(CreateDTO docu)
+        {
+            return !await context.Documentations.AnyAsync(c => c.Documentation.Equals(docu.Text));
+        }
+        public Task<bool> HasRequiredData(CreateDTO docu)
+        {
+            return Task.FromResult(!string.IsNullOrEmpty(docu.Text));
+        }
+        public async Task<bool> HasValidExistingId(ReadUpdateDTO docu)
+        {
+            var there = !string.IsNullOrEmpty(docu.Id.ToString());
+            var exists = await context.Documentations.AnyAsync(c => c.Descriptor.Equals(docu.Id));
+
+            return await Task.FromResult(there && exists);
+        }
+        public async Task<bool> IsExistingId(Guid id)
+        {
+            return await context.Documentations.AnyAsync(c => c.Descriptor.Equals(id));
+        }
+
+        //-----------------------------
+        //--------- SAVE CHANGES ------
+        //-----------------------------
         /// <summary>
         /// Saves the Changes to the Database
         /// </summary>

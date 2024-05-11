@@ -4,6 +4,7 @@ using KnowledgeBasev2.Domain.DTOs;
 using KnowledgeBasev2.Domain.Entities;
 using KnowledgeBasev2.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace KnowledgeBasev2.Infrastructure.ContractImplementations
 {
@@ -16,11 +17,13 @@ namespace KnowledgeBasev2.Infrastructure.ContractImplementations
             this.context = context;
         }
 
+        //-----------------------------
+        //--------- CREATE ------------
+        //-----------------------------
+
         /// <summary>
         /// Create a new command from a CreateDTO including Descriptor and Description and save them to the Database
         /// </summary>
-        /// <param name="dto">The CreateDTO contains all required Information to create a new command except the Guid</param>
-        /// <returns>a ServiceResponse with an empty Guid if failed or the new Guid if successful</returns>
         public async Task<ServiceResponse<Guid>> CreateAsync(CreateDTO dto)
         {
             Guid guid = Guid.NewGuid();
@@ -39,11 +42,14 @@ namespace KnowledgeBasev2.Infrastructure.ContractImplementations
         }
 
 
+        //-----------------------------
+        //--------- READ --------------
+        //-----------------------------
+
         /// <summary>
         /// Get all available commands from the Database and returns them as ReadUpdateDTO
         /// including the data from the descriptor and description
         /// </summary>
-        /// <returns>A List of commands as ReadUpdateDTOs</returns>
         public async Task<IEnumerable<ReadUpdateDTO>> GetAsync()
         {
             var result = from cmd in context.Commands.AsNoTracking()
@@ -57,8 +63,6 @@ namespace KnowledgeBasev2.Infrastructure.ContractImplementations
         /// <summary>
         /// Gets the command/Descriptor/Description with the given Id from the Database and combines the data into a single ReadUpdateDTO
         /// </summary>
-        /// <param name="id">The Guid of the Descriptor connection command/Descriptor/Description</param>
-        /// <returns>A single ReadUpdateDTO with the given id</returns>
         public async Task<ReadUpdateDTO> GetByIdAsync(Guid id)
         {
             var cmd = await context.Commands.FirstAsync(c => c.Descriptor.Equals(id));
@@ -77,8 +81,6 @@ namespace KnowledgeBasev2.Infrastructure.ContractImplementations
         /// <summary>
         /// Get all available commands from the Dabatase with the given "Lang"uage or a partly match
         /// </summary>
-        /// <param name="lang">The "Lang"uage Property of the Descriptor</param>
-        /// <returns>A List of all commands in the given lang</returns>
         public async Task<IEnumerable<ReadUpdateDTO>> GetByLangAsync(string lang)
         {
             var descriptors = context.Descriptors.AsNoTracking().Where(c => c.Lang.Contains(lang) || lang.Contains(c.Lang));
@@ -93,8 +95,6 @@ namespace KnowledgeBasev2.Infrastructure.ContractImplementations
         /// <summary>
         /// Get all available commands from the Dabatase with the given "System" or a partly match
         /// </summary>
-        /// <param name="lang">The System Property of the Descriptor</param>
-        /// <returns>A List of all commands in the given system</returns>
         public async Task<IEnumerable<ReadUpdateDTO>> GetBySystemAsync(string system)
         {
             var descriptors = context.Descriptors.AsNoTracking().Where(c => c.System.Contains(system) || system.Contains(c.System));
@@ -109,8 +109,6 @@ namespace KnowledgeBasev2.Infrastructure.ContractImplementations
         /// <summary>
         /// Get all available commands from the Dabatase with the given Tech or a partly match
         /// </summary>
-        /// <param name="lang">The Tech Property of the Descriptor</param>
-        /// <returns>A List of all commands in the given tech</returns>
         public async Task<IEnumerable<ReadUpdateDTO>> GetByTechAsync(string tech)
         {
             var descriptors = context.Descriptors.AsNoTracking().Where(c => c.Tech.Contains(tech) || tech.Contains(c.Tech));
@@ -123,12 +121,12 @@ namespace KnowledgeBasev2.Infrastructure.ContractImplementations
         }
 
 
+        //-----------------------------
+        //--------- UPDATE ------------
+        //-----------------------------
         /// <summary>
         /// Update the command/Descriptor/Description matching the ReadUpdateDTO
         /// </summary>
-        /// <param name="dto">ReadUpdateDTO to update</param>
-        /// <returns>a ServiceResponse with an Error and an empty Guid on Error or with the Guid of the 
-        ///         updated command/Descriptor/Description on success </returns>
         public async Task<ServiceResponse<Guid>> UpdateAsync(ReadUpdateDTO dto)
         {
             var cmd = KBCommand.fromDTO(dto);
@@ -150,11 +148,12 @@ namespace KnowledgeBasev2.Infrastructure.ContractImplementations
         }
 
 
+        //-----------------------------
+        //--------- DELETE ------------
+        //-----------------------------
         /// <summary>
         /// Deletes the command/Descriptor/Description with the given id
         /// </summary>
-        /// <param name="id">The Guid of the Descriptor connecting the command/Descriptor/Description</param>
-        /// <returns>a ServiceResponse with an Error and an empty Guid on Error or with the deleted id on success</returns>
         public async Task<ServiceResponse<Guid>> DeleteAsync(Guid id)
         {
             var cmd = await context.Commands.FindAsync(id);
@@ -175,10 +174,35 @@ namespace KnowledgeBasev2.Infrastructure.ContractImplementations
             }
         }
 
-        /// <summary>
-        /// Saves the Changes to the Database
-        /// </summary>
-        /// <returns></returns>
+        //-----------------------------
+        //--------- VALIDATION --------
+        //-----------------------------
+        public async Task<bool> IsUniqueCommand(CreateDTO command)
+        {
+            return !await context.Commands.AnyAsync(c => c.Command.Equals(command.Text));
+        }
+
+        public Task<bool> HasRequiredData(CreateDTO command)
+        {
+            return Task.FromResult(!string.IsNullOrEmpty(command.Text));
+        }
+
+        public async Task<bool> HasValidExistingId(ReadUpdateDTO command)
+        {
+            var there = !string.IsNullOrEmpty(command.Id.ToString());
+            var exists = await context.Commands.AnyAsync(c => c.Descriptor.Equals(command.Id));
+
+            return await Task.FromResult(there && exists);
+        }
+        public async Task<bool> IsExistingId(Guid id)
+        {
+            return await context.Commands.AnyAsync(c => c.Descriptor.Equals(id));
+        }
+
+        //-----------------------------
+        //--------- SAVE CHANGES ------
+        //-----------------------------
         private async Task SaveChangesAsync() => await context.SaveChangesAsync();
+
     }
 }
