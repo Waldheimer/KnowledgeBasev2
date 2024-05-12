@@ -8,10 +8,10 @@ using System.Net.Http.Json;
 
 namespace KnowledgeBasev2.Tests.Commands
 {
-    public class CreateUserTest : BaseFunctionalTest
+    public class CreateCommandTest : BaseFunctionalTest
     {
         private readonly CreateDTO validDTO, invalidDTO;
-        public CreateUserTest(TestWebAppFactory factory) : base(factory)
+        public CreateCommandTest(TestWebAppFactory factory) : base(factory)
         {
             validDTO = new CreateDTO()
             {
