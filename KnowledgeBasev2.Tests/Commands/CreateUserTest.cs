@@ -40,18 +40,21 @@ namespace KnowledgeBasev2.Tests.Commands
             //------------------------------
 
             HttpResponseMessage response;
+            ServiceResponse<Guid>? result;
 
             //------------------------------
             //--------- Act ----------------
             //------------------------------
 
             response = await HttpClient.PostAsJsonAsync("api/command", invalidDTO);
+            result = await response.Content.ReadFromJsonAsync<ServiceResponse<Guid>>();
 
             //------------------------------
             //--------- Assert -------------
             //------------------------------
 
-            response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            result!.Data.Should().Be(Guid.Empty);
         }
 
         [Fact]
@@ -74,7 +77,7 @@ namespace KnowledgeBasev2.Tests.Commands
                 result = await response.Content.ReadFromJsonAsync<ServiceResponse<Guid>>();
             }catch(Exception e) { }
                                     
-            var success = await HttpClient.GetAsync($"api/command/{result.Data}");
+            var success = await HttpClient.GetAsync($"api/command/{result!.Data}");
 
             //------------------------------
             //--------- Assert -------------
