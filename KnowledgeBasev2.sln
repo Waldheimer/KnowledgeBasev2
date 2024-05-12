@@ -17,8 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnowledgeBasev2.WPF", "Know
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnowledgeBasev2.Tests", "KnowledgeBasev2.Tests\KnowledgeBasev2.Tests.csproj", "{92BDAB8A-CB78-475B-8AE2-3D57F0B09653}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeBasev2.MAUI", "KnowledgeBasev2.MAUI\KnowledgeBasev2.MAUI.csproj", "{3FBB4648-BF0D-4FDA-831D-6AB4D4984193}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
