@@ -75,8 +75,9 @@ namespace KnowledgeBasev2.Tests.Commands
             try
             {
                 result = await response.Content.ReadFromJsonAsync<ServiceResponse<Guid>>();
-            }catch(Exception e) { }
-                                    
+            }
+            catch (Exception e) { }
+
             var success = await HttpClient.GetAsync($"api/command/{result!.Data}");
 
             //------------------------------
