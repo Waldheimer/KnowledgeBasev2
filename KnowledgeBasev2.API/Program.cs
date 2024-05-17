@@ -22,6 +22,7 @@ builder.Services.AddDbContext<RemoteDbContext>(o => o.UseSqlServer(builder.Confi
 builder.Services.AddScoped<IKbCommand, KBCommandRepo>();
 builder.Services.AddScoped<IKbCode, KBCodeRepo>();
 builder.Services.AddScoped<IKbDocumentation, KBDocumentationRepo>();
+builder.Services.AddScoped<DefaultInfoRepo>();
 
 builder.Services.AddMediatR(config => {
     config.RegisterServicesFromAssemblies(typeof(GetCommandListQueryHandler).Assembly, typeof(GetCommandsListQuery).Assembly);

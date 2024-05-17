@@ -3,10 +3,53 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:KnowledgeBasev2.WPF"
+        xmlns:local="clr-namespace:KnowledgeBasev2.WPF" 
+        xmlns:vms="clr-namespace:KnowledgeBasev2.WPF.ViewModels"
+        xmlns:views="clr-namespace:KnowledgeBasev2.WPF.Views"
+        xmlns:components="clr-namespace:KnowledgeBasev2.WPF.Components"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="900" Width="1600" Background="LightGray">
+    <Window.Resources>
+        <Style TargetType="Border">
+            <Setter Property="BorderBrush" Value="SteelBlue"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="CornerRadius" Value="2"/>
+        </Style>
+    </Window.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!-- ************************** -->
+        <!-- MainMenu -->
+        <!-- ************************** -->
+        <Border Grid.Row="1">
+            <components:MainMenu Grid.Row="1"/>
+        </Border>
 
+        <Border Grid.Row="1" Grid.Column="1">
+            <ContentControl Content="{Binding CurrentViewModel}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type vms:DashboardViewModel}">
+                        <views:Dashboard />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vms:CommandPageViewModel}">
+                        <views:CommandPage />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vms:CodePageViewModel}">
+                        <views:CodePage />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vms:DocumentationPageViewModel}">
+                        <views:DocumentationPage />
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+        </Border>
     </Grid>
 </Window>

@@ -1,0 +1,99 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="DefaultLightBackground1" A="255" R="170" G="170" B="170"/>
+    <Color x:Key="DefaultLightBackground2" A="255" R="250" G="250" B="255"/>
+
+    <Color x:Key="DefaultButtonEdgeColor" R="205" G="205" B="205"/>
+    <Color x:Key="HoverButtonEdgeColor" R="255" G="196" B="64"/>
+    <Color x:Key="ClickButtonEdgeColor" R="64" G="255" B="64"/>
+
+
+    <Style TargetType="Button" x:Key="BasicButtonStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="BasicButtonBorder"
+                            BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="5">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint=".5 0" EndPoint=".5 1">
+                                <GradientStop x:Name="bg_Gradient_0" Offset="0" Color="{StaticResource DefaultButtonEdgeColor}"/>
+                                <GradientStop x:Name="bg_Gradient_1" Offset=".1" Color="{StaticResource DefaultLightBackground1}"/>
+                                <GradientStop x:Name="bg_Gradient_2" Offset=".9" Color="{StaticResource DefaultLightBackground2}"/>
+                                <GradientStop x:Name="bg_Gradient_3" Offset="1" Color="{StaticResource DefaultButtonEdgeColor}"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="True"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard  x:Name="MouseOverAnimation">
+                                        <ColorAnimation Storyboard.TargetName="bg_Gradient_0" Storyboard.TargetProperty="Color"
+                                                        To="{StaticResource HoverButtonEdgeColor}" Duration="0:0:0:1"/>
+                                        <ColorAnimation  Storyboard.TargetName="bg_Gradient_3" Storyboard.TargetProperty="Color"
+                                                        To="{StaticResource HoverButtonEdgeColor}" Duration="0:0:0:1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard  x:Name="MouseOutAnimation">
+                                        <ColorAnimation Storyboard.TargetName="bg_Gradient_0" Storyboard.TargetProperty="Color"
+                                                        To="{StaticResource DefaultButtonEdgeColor}" Duration="0:0:0:1"/>
+                                        <ColorAnimation  Storyboard.TargetName="bg_Gradient_3" Storyboard.TargetProperty="Color"
+                                                        To="{StaticResource DefaultButtonEdgeColor}" Duration="0:0:0:1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="True"/>
+                                <Condition Property="IsPressed" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="PressedAnimation">
+                                        <ColorAnimation Storyboard.TargetName="bg_Gradient_1" Storyboard.TargetProperty="Color"
+                                                        To="{StaticResource DefaultLightBackground2}" Duration="0:0:0:01"/>
+                                        <ColorAnimation Storyboard.TargetName="bg_Gradient_2" Storyboard.TargetProperty="Color"
+                                                        To="{StaticResource DefaultLightBackground1}" Duration="0:0:0:01"/>
+                                        <ColorAnimation Storyboard.TargetName="bg_Gradient_0" Storyboard.TargetProperty="Color"
+                                                        To="{StaticResource ClickButtonEdgeColor}" Duration="0:0:0:01"/>
+                                        <ColorAnimation Storyboard.TargetName="bg_Gradient_3" Storyboard.TargetProperty="Color"
+                                                        To="{StaticResource ClickButtonEdgeColor}" Duration="0:0:0:01"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="ReleasedAnimation">
+                                        <ColorAnimation Storyboard.TargetName="bg_Gradient_1" Storyboard.TargetProperty="Color"
+                                                        To="{StaticResource DefaultLightBackground1}" Duration="0:0:0:01"/>
+                                        <ColorAnimation Storyboard.TargetName="bg_Gradient_2" Storyboard.TargetProperty="Color"
+                                                        To="{StaticResource DefaultLightBackground2}" Duration="0:0:0:01"/>
+                                        <ColorAnimation Storyboard.TargetName="bg_Gradient_0" Storyboard.TargetProperty="Color"
+                                                        To="{StaticResource HoverButtonEdgeColor}" Duration="0:0:0:01"/>
+                                        <ColorAnimation Storyboard.TargetName="bg_Gradient_3" Storyboard.TargetProperty="Color"
+                                                        To="{StaticResource HoverButtonEdgeColor}" Duration="0:0:0:01"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

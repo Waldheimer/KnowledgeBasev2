@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="KnowledgeBasev2.WPF.Views.Dashboard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KnowledgeBasev2.WPF.Views"
+             xmlns:components="clr-namespace:KnowledgeBasev2.WPF.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <components:CommandOverallInfo Grid.Column="0"/>
+        <components:CodeOverallInfo Grid.Column="1"/>
+        <components:DocumentationOverallInfo Grid.Column="2"/>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">Systems</TextBlock>
+        <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">Technologies</TextBlock>
+        <TextBlock Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">Languages</TextBlock>
+        <ListView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Systems}" />
+        <ListView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Techs}" />
+        <ListView Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Langs}" />
+    </Grid>
+</UserControl>
