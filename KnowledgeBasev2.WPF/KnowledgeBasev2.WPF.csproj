@@ -9,4 +9,15 @@
 	<EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="MdXaml" Version="1.27.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KnowledgeBasev2.Application\KnowledgeBasev2.Application.csproj" />
+    <ProjectReference Include="..\KnowledgeBasev2.Domain\KnowledgeBasev2.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

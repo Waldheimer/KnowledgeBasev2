@@ -1,0 +1,108 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ***** COLORS *************************** -->
+        <!-- ***** Default Colors *************** -->
+    <Color x:Key="DefaultBackgroundColor" A="255" R="205" G="205" B="205"/>
+    <Color x:Key="DefaultBorderColor" A="255" R="0" G="0" B="0"/>
+
+        <!-- ***** Mouse-Over-Colors ************ -->
+    <Color x:Key="MouseOverBackgroundColor" A="32" R="0" G="255" B="64"/>
+    <Color x:Key="MouseOverBorderColor" A="255" R="255" G="128" B="32"/>
+
+        <!-- ***** Click-Colors ***************** -->
+    <Color x:Key="MouseClickBackgroundColor" A="128" R="0" G="255" B="64"/>
+
+    <!-- ***** SOLID-COLOR-BRUSHES ************** -->
+    <SolidColorBrush x:Key="DefaultBackground" x:Name="DefaultBackground" Color="#cccccc"/>
+    
+    <!-- ***** GRADIENT-COLOR-BRUSHES *********** -->
+    <LinearGradientBrush x:Key="DefaultBorderBrush" x:Name="DefaultBorderBrush" StartPoint="0 .5" EndPoint="1 .5" 
+                                            SpreadMethod="Reflect">
+        <GradientStop x:Name="DefaultBorderBrush_c0" Offset="0.25" Color="#cccccc"/>
+        <GradientStop x:Name="DefaultBorderBrush_c1" Offset="1" Color="SteelBlue"/>
+    </LinearGradientBrush>
+
+    <!-- ***** STORYBOARDS ********************** -->
+
+
+
+
+    <Style TargetType="{x:Type Button}" x:Key="MenuButtonTemplate">
+        <Setter Property="Background" Value="#cccccc"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <ControlTemplate.Resources>
+
+                        
+                    </ControlTemplate.Resources>
+                    <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{StaticResource DefaultBorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="0 15 15 0"
+                            Margin="{TemplateBinding Margin}" Cursor="Hand">
+                        <Border.Resources>
+                        </Border.Resources>
+                        <TextBlock Margin="{TemplateBinding Padding}" 
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                          Text="{TemplateBinding Content}" FontSize="{TemplateBinding FontSize}"
+                                          FontWeight="{TemplateBinding FontWeight}" Foreground="{TemplateBinding Foreground}"
+                                          TextAlignment="Center" Cursor="Hand"
+                                          />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="True"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="StartMouseOver">
+                                        <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                        To="LightSteelBlue" Duration="0:0:0:0.5"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="EndMouseOver" FillBehavior="Stop">
+                                        <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                        To="#cccccc" Duration="0:0:0:1.5"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="True"/>
+                                <Condition Property="IsPressed" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="StartButtonClick">
+                                        <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                                                        To="SteelBlue" Duration="0"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="EndButtonClick" FillBehavior="Stop">
+                                        <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                                                        To="LightSteelBlue" Duration="0:0:0:1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="DarkGray"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

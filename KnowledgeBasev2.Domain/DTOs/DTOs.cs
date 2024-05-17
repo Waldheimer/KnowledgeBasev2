@@ -53,6 +53,16 @@ namespace KnowledgeBasev2.Domain.DTOs
             this.Description = description.DescriptionText;
             this.Version = description.Version;
         }
+        public ReadUpdateDTO(CreateDTO command, Guid id)
+        {
+            this.Id = id;
+            this.Text = command.Text;
+            this.System = command.System;
+            this.Tech = command.Tech;
+            this.Lang = command.Lang;
+            this.Version = command.Version;
+            this.Description = command.Description;
+        }
 
         public static ReadUpdateDTO Default => new ReadUpdateDTO{ 
             Id =  Guid.Empty,

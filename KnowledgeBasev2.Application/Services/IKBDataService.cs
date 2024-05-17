@@ -1,14 +1,14 @@
 ﻿using KnowledgeBasev2.Application.DTOs;
 using KnowledgeBasev2.Domain.DTOs;
 
-namespace KnowledgeBasev2.Application.Contracts
+namespace KnowledgeBasev2.Application.Services
 {
-    public interface IKbCode
+    public interface IKBDataService
     {
         //-----------------------------
         //--------- CREATE ------------
         //-----------------------------
-        Task<ServiceResponse<Guid>> CreateAsync(CreateDTO code);
+        Task<ServiceResponse<Guid>> CreateAsync(CreateDTO command);
         //-----------------------------
         //--------- READ --------------
         //-----------------------------
@@ -18,9 +18,9 @@ namespace KnowledgeBasev2.Application.Contracts
         Task<IEnumerable<ReadUpdateDTO>> GetByTechAsync(string tech);
         Task<IEnumerable<ReadUpdateDTO>> GetByLangAsync(string lang);
         //-----------------------------
-        //--------- UPDATE ------------
+        //--------- UPDATA ------------
         //-----------------------------
-        Task<ServiceResponse<Guid>> UpdateAsync(ReadUpdateDTO code);
+        Task<ServiceResponse<Guid>> UpdateAsync(ReadUpdateDTO command);
         //-----------------------------
         //--------- DELETE ------------
         //-----------------------------

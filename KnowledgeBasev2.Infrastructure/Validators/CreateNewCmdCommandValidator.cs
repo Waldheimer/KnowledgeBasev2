@@ -14,7 +14,7 @@ namespace KnowledgeBasev2.Infrastructure.Validators
         {
             RuleFor(c => c.Input).MustAsync(async (data, _) =>
             {
-                return await repo.HasRequiredData(data);
+                return await repo.HasRequiredData(data) && await repo.IsUniqueCommand(data);
             }).WithMessage("CommandText is required for Command Creation!!!");
         }
     }

@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="KnowledgeBasev2.WPF.Components.MainMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KnowledgeBasev2.WPF.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="250" Background="#cccccc">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/Templates/MenuButtonTemplate.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Canvas>
+            <Path Stroke="LightSteelBlue" Fill="SteelBlue" Data="M10 15 L 40 25 l -30 10" Canvas.Top="{Binding ActiveView}"/>
+        </Canvas>
+        <StackPanel Grid.Column="1">
+            <StackPanel.Resources>
+                <Style x:Key="localMenuButton" TargetType="Button" BasedOn="{StaticResource MenuButtonTemplate}">
+                    <Setter Property="Height" Value="50"/>
+                    <Setter Property="FontSize" Value="20"/>
+                    <Setter Property="FontFamily" Value="Times New Roman"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button Style="{StaticResource localMenuButton}" Command="{Binding NavigateToDashboardCommand}" Content="Dashboard"/>
+            <Button Style="{StaticResource localMenuButton}" Command="{Binding NavigateToCommandViewCommand}" Content="Commands"/>
+            <Button Style="{StaticResource localMenuButton}" Command="{Binding NavigateToCodeViewCommand}" Content="Codes"/>
+            <Button Style="{StaticResource localMenuButton}" Command="{Binding NavigateToDocumentationViewCommand}" Content="Documentations"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

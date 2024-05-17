@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KnowledgeBasev2.Application\KnowledgeBasev2.Application.csproj" />
     <ProjectReference Include="..\KnowledgeBasev2.Infrastructure\KnowledgeBasev2.Infrastructure.csproj" />
   </ItemGroup>
 

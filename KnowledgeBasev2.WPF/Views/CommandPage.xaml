@@ -1,0 +1,294 @@
+﻿<UserControl x:Class="KnowledgeBasev2.WPF.Views.CommandPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:dtos="clr-namespace:KnowledgeBasev2.Domain.DTOs;assembly=KnowledgeBasev2.Domain"
+             xmlns:local="clr-namespace:KnowledgeBasev2.WPF.Views"
+             xmlns:mdxaml="https://github.com/whistyun/MdXaml"
+             xmlns:converter="clr-namespace:KnowledgeBasev2.WPF.Converter"
+             xmlns:custom="clr-namespace:KnowledgeBasev2.WPF.CustomControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/TextBlockStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Resources>
+            <converter:GuidLengthConverter x:Key="guidconverter"/>
+            <BooleanToVisibilityConverter x:Key="visconverter"/>
+            <converter:StringToFlowDocConverter x:Key="stfConverter"/>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="125"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- SEARCH GRID -->
+        <Grid Grid.Column="1" Background="LightGray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock Text="{Binding LastActionMessage}" Height="30" TextAlignment="Center" FontSize="12" TextWrapping="Wrap"/>
+                <ComboBox Height="30" VerticalAlignment="Center" ItemsSource="{Binding Categories}" Margin="5" 
+                          SelectedItem="{Binding SearchCategory, UpdateSourceTrigger=PropertyChanged}"
+                          />
+            </StackPanel>
+            <Grid Grid.Column="1" Width="250" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="30" 
+                     VerticalContentAlignment="Center" TextAlignment="Center" FontSize="14" FontWeight="SemiBold" Margin="0 1 5 1"/>
+                <Button Content="Search" Height="25" Command="{Binding SearchForCommand}" Background="SteelBlue" Foreground="White" 
+                            Grid.Column="0" Grid.Row="1" Margin="0 1 5 1" FontWeight="Bold" FontSize="15"/>
+                <Button Content="  Clear &#xa; Search" HorizontalAlignment="Center" Width="45" Grid.Column="1" Grid.RowSpan="2" Command="{Binding ClearSearchCommand}" Background="LightSteelBlue" 
+                            Margin="2"/>
+               
+            </Grid>
+            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="60"/>
+                        <Setter Property="Height" Value="40"/>
+                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="FontSize" Value="15"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Foreground" Value="White"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Button Background="SteelBlue" Command="{Binding ToggleCreateNewCommand}" Content="New" 
+                        Visibility="{Binding IsNotEditEnabled, Converter={StaticResource visconverter}}"/>
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Width" Value="40"/>
+                            <Setter Property="Height" Value="25"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button Content="Edit" VerticalAlignment="Center" Background="Yellow" Command="{Binding EditCurrentCommand}"
+                             Visibility="{Binding IsNotEditEnabled, Converter={StaticResource visconverter}}"/>
+                    <Button Content="Delete" VerticalAlignment="Center" Background="OrangeRed" Command="{Binding DeleteCurrentCommand}"
+                            Visibility="{Binding IsNotEditEnabled, Converter={StaticResource visconverter}}"/>
+                    <Button Content="Save" VerticalAlignment="Center" Background="Yellow" Command="{Binding SaveEditCommand}"
+                            Visibility="{Binding IsEditEnabled, Converter={StaticResource visconverter}}"/>
+                    <Button Content="Cancel" VerticalAlignment="Center" Background="OrangeRed" Command="{Binding CancelEditCommand}"
+                            Visibility="{Binding IsEditEnabled, Converter={StaticResource visconverter}}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <!-- ID SELECTION -->
+        <ListView Grid.Row="1" ItemsSource="{Binding AllCommands}" Background="LightGray" ScrollViewer.VerticalScrollBarVisibility="Hidden"
+              SelectedItem="{Binding SelectedCommand}" SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <!--<ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+
+                    </StackPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>-->
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type dtos:ReadUpdateDTO}">
+                    <Border x:Name="IdBorder" BorderThickness="1" CornerRadius="5" Background="SteelBlue" Padding="5 2" Width="110" Cursor="Hand">
+                        <TextBlock x:Name="IdText" Text="{Binding Id, Converter={StaticResource guidconverter}}" Margin="2" 
+                                   HorizontalAlignment="Stretch" FontSize="10" Foreground="White"
+                                   TextAlignment="Center"></TextBlock>
+                    </Border>
+                    <DataTemplate.Triggers>
+                        <Trigger Property="Border.IsMouseOver" Value="True">
+                            <Setter TargetName="IdBorder" Property="Background" Value="LightSteelBlue"/>
+                        </Trigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}},Path=IsSelected}" Value="True">
+                            <Setter TargetName="IdBorder" Property="Background" Value="#00ff88"/>
+                            <Setter TargetName="IdText" Property="Foreground" Value="Black"/>
+                            <Setter TargetName="IdText" Property="FontWeight" Value="Bold"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- COMMAND INFO -->
+        <Grid Grid.Row="1" Grid.Column="1" Margin="25 5">
+            <Grid.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="Background" Value="#dddddd"/>
+                    <Setter Property="BorderBrush" Value="SteelBlue"/>
+                    <Setter Property="BorderThickness" Value="1.5"/>
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="Padding" Value="5"/>
+                    <Setter Property="MinHeight" Value="45"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" MaxHeight="500"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" Grid.ColumnSpan="2">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Code" Style="{StaticResource TextBlockLabel}"/>
+                    <mdxaml:MarkdownScrollViewer Markdown="{Binding CurrentDocument}" FontSize="25"
+                                                 VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0 5 0 0"
+                                                 Visibility="{Binding IsNotEditEnabled, Converter={StaticResource visconverter}}"/>
+                    <TextBox Text="{Binding SelectedCommand.Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                             VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0 5 0 0"  Style="{StaticResource TextBoxInfo}"
+                             Visibility="{Binding IsEditEnabled, Converter={StaticResource visconverter}, FallbackValue=Hidden}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="1" Grid.ColumnSpan="2">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="System" Style="{StaticResource TextBlockLabel}"/>
+                    <TextBlock Text="{Binding SelectedCommand.System}" Style="{StaticResource TextBlockInfo}" 
+                               Visibility="{Binding IsNotEditEnabled, Converter={StaticResource visconverter}}" />
+                    <TextBox Text="{Binding SelectedCommand.System, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                             VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0 5 0 0"  Style="{StaticResource TextBoxInfo}"
+                             Visibility="{Binding IsEditEnabled, Converter={StaticResource visconverter}, FallbackValue=Hidden}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="2" Grid.ColumnSpan="2">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Technology" Style="{StaticResource TextBlockLabel}"/>
+                    <TextBlock Text="{Binding SelectedCommand.Tech}" Style="{StaticResource TextBlockInfo}"
+                               Visibility="{Binding IsNotEditEnabled, Converter={StaticResource visconverter}}"/>
+                    <TextBox Text="{Binding SelectedCommand.Tech, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1"
+                             VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0 5 0 0"  Style="{StaticResource TextBoxInfo}"
+                             Visibility="{Binding IsEditEnabled, Converter={StaticResource visconverter}, FallbackValue=Hidden}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="3" Grid.ColumnSpan="2">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Language" Style="{StaticResource TextBlockLabel}"/>
+                    <TextBlock Text="{Binding SelectedCommand.Lang}" Style="{StaticResource TextBlockInfo}"
+                               Visibility="{Binding IsNotEditEnabled, Converter={StaticResource visconverter}}"/>
+                    <TextBox Text="{Binding SelectedCommand.Lang, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                             VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0 5 0 0" Style="{StaticResource TextBoxInfo}" 
+                             Visibility="{Binding IsEditEnabled, Converter={StaticResource visconverter}, FallbackValue=Hidden}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="4" Grid.ColumnSpan="2">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Version" Style="{StaticResource TextBlockLabel}"/>
+                    <TextBlock Text="{Binding SelectedCommand.Version}" Style="{StaticResource TextBlockInfo}"
+                               Visibility="{Binding IsNotEditEnabled, Converter={StaticResource visconverter}}"/>
+                    <TextBox Text="{Binding SelectedCommand.Version, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                             VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0 5 0 0"  Style="{StaticResource TextBoxInfo}"
+                             Visibility="{Binding IsEditEnabled, Converter={StaticResource visconverter}, FallbackValue=Hidden}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="5" Grid.ColumnSpan="2">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Description" Style="{StaticResource TextBlockLabel}"/>
+                    <TextBlock Text="{Binding SelectedCommand.Description}" Style="{StaticResource TextBlockInfo}" TextWrapping="Wrap"
+                               Visibility="{Binding IsNotEditEnabled, Converter={StaticResource visconverter}}"/>
+                    <TextBox Text="{Binding SelectedCommand.Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                             VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0 5 0 0" Style="{StaticResource TextBoxInfo}"
+                             Visibility="{Binding IsEditEnabled, Converter={StaticResource visconverter}, FallbackValue=Hidden}"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- New Command Window -->
+        <Grid Grid.RowSpan="2" Grid.ColumnSpan="2" Background="SteelBlue" 
+              Visibility="{Binding IsCreateNewActive, Converter={StaticResource visconverter}, FallbackValue=Hidden}">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Width" Value="100"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="15"/>
+                    </Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Width" Value="350"/>
+                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="Padding" Value="10 2"/>
+                        <Setter Property="Background" Value="SteelBlue"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontSize" Value="12"/>
+                    </Style>
+                    <Style TargetType="TextBox" x:Key="rtb">
+                        <Setter Property="Width" Value="350"/>
+                        <Setter Property="Height" Value="150"/>
+                        <Setter Property="Background" Value="SteelBlue"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontSize" Value="12"/>
+                    </Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Orientation" Value="Horizontal"/>
+                        <Setter Property="Margin" Value="5"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="500"/>
+                    <ColumnDefinition Width="75"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Grid.Column="1" Grid.Row="4" Width="55" Background="OrangeRed" Command="{Binding ToggleCreateNewCommand}">Cancel</Button>
+                <Button Grid.Column="1" Grid.Row="5" Width="55" Height="45" Background="GreenYellow" Command="{Binding CreateNewCommand}">OK</Button>
+                <StackPanel Grid.Row="0" Width="500" Orientation="Horizontal">
+                    <TextBlock>Command</TextBlock>
+                    <TextBox Text="{Binding NewCommandText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Width="500" Orientation="Horizontal">
+                    <TextBlock>System</TextBlock>
+                    <TextBox Text="{Binding NewCommandSystem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Width="500" Orientation="Horizontal">
+                    <TextBlock>Technology</TextBlock>
+                    <TextBox Text="{Binding NewCommandTech, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Width="500" Orientation="Horizontal">
+                    <TextBlock>Language</TextBlock>
+                    <TextBox Text="{Binding NewCommandLang, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+                </StackPanel>
+                <StackPanel Grid.Row="4" Width="500" Orientation="Horizontal">
+                    <TextBlock>Version</TextBlock>
+                    <TextBox Text="{Binding NewCommandVersion, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+                </StackPanel>
+                <StackPanel Grid.Row="5" Width="500" Orientation="Horizontal">
+                    <TextBlock>Description</TextBlock>
+                    <TextBox AcceptsReturn="True" AcceptsTab="True" Style="{StaticResource rtb}" TextWrapping="Wrap"
+                            Text="{Binding NewCommandDescription, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        
+    </Grid>
+</UserControl>
