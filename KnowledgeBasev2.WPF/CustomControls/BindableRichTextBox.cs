@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+
+namespace KnowledgeBasev2.WPF.CustomControls
+{
+    public class BindableRichTextBox : RichTextBox
+    {
+        public static readonly DependencyProperty SourceProperty =
+            DependencyProperty.Register("Source",
+                typeof(Uri), typeof(BindableRichTextBox),
+                new PropertyMetadata(OnSourceChanged));
+
+        public Uri Source
+        {
+            get => GetValue(SourceProperty) as Uri;
+            set => SetValue(SourceProperty, value);
+        }
+
+        private static void OnSourceChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            if (obj is BindableRichTextBox rtf && rtf.Source != null)
+            {
+                try
+                {
+                    var stream = System.Windows.Application.GetResourceStream(rtf.Source);
+                    if (stream != null)
+                    {
+                        var range = new TextRange(rtf.Document.ContentStart, rtf.Document.ContentEnd);
+                        range.Load(stream.Stream, DataFormats.Rtf);
+                    }
+                }
+                catch
+                {
+                    
+                }
+            }
+        }
+    }
+}

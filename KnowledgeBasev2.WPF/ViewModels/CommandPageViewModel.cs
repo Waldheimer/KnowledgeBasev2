@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+<<<<<<< HEAD
 using CommunityToolkit.Mvvm.Input;
 using KnowledgeBasev2.Domain.DTOs;
 using KnowledgeBasev2.WPF.Manager;
@@ -216,5 +217,17 @@ namespace KnowledgeBasev2.WPF.ViewModels
             SearchText = string.Empty;
             SearchFor();
         }
+=======
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace KnowledgeBasev2.WPF.ViewModels
+{
+    public class CommandPageViewModel : ObservableRecipient
+    {
+>>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
     }
 }

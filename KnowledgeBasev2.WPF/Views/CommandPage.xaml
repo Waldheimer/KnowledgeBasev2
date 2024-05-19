@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+<<<<<<< HEAD
              xmlns:dtos="clr-namespace:KnowledgeBasev2.Domain.DTOs;assembly=KnowledgeBasev2.Domain"
              xmlns:local="clr-namespace:KnowledgeBasev2.WPF.Views"
              xmlns:mdxaml="https://github.com/whistyun/MdXaml"
@@ -290,5 +291,12 @@
             </Grid>
         </Grid>
         
+=======
+             xmlns:local="clr-namespace:KnowledgeBasev2.WPF.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">COMMANDS</TextBlock>
+>>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
     </Grid>
 </UserControl>

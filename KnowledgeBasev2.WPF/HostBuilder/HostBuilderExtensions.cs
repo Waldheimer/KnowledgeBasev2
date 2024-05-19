@@ -56,7 +56,10 @@ namespace KnowledgeBasev2.WPF.HostBuilder
                 services.AddSingleton<CommandService>();
                 services.AddSingleton<CodeService>();
                 services.AddSingleton<DocumentationService>();
+<<<<<<< HEAD
                 services.AddSingleton<DefaultInfoService>();
+=======
+>>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
             });
             return hostBuilder;
         }

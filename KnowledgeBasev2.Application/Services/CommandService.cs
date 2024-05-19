@@ -43,30 +43,48 @@ namespace KnowledgeBasev2.Application.Services
 
         public async Task<IEnumerable<ReadUpdateDTO>> GetByLangAsync(string lang)
         {
+<<<<<<< HEAD
             var data = await _httpClient.GetAsync($"{BaseUrl}/api/command/lang/{lang}");
+=======
+            var data = await _httpClient.GetAsync($"{BaseUrl}/api/commands/lang/{lang}");
+>>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
             var response = await data.Content.ReadFromJsonAsync<IEnumerable<ReadUpdateDTO>>();
             return response!;
         }
 
         public async Task<IEnumerable<ReadUpdateDTO>> GetBySystemAsync(string system)
         {
+<<<<<<< HEAD
             var data = await _httpClient.GetAsync($"{BaseUrl}/api/command/system/{system}");
+=======
+            var data = await _httpClient.GetAsync($"{BaseUrl}/api/commands/system/{system}");
+>>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
             var response = await data.Content.ReadFromJsonAsync<IEnumerable<ReadUpdateDTO>>();
             return response!;
         }
 
         public async Task<IEnumerable<ReadUpdateDTO>> GetByTechAsync(string tech)
         {
+<<<<<<< HEAD
             var data = await _httpClient.GetAsync($"{BaseUrl}/api/command/tech/{tech}");
+=======
+            var data = await _httpClient.GetAsync($"{BaseUrl}/api/commands/tech/{tech}");
+>>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
             var response = await data.Content.ReadFromJsonAsync<IEnumerable<ReadUpdateDTO>>();
             return response!;
         }
 
         public async Task<ServiceResponse<Guid>> UpdateAsync(ReadUpdateDTO command)
         {
+<<<<<<< HEAD
             var data = await _httpClient.PutAsJsonAsync($"{BaseUrl}/api/command", command);
             var response = await data.Content.ReadFromJsonAsync<ServiceResponse<Guid>>();
             return response;
+=======
+            var data = await _httpClient.PutAsJsonAsync($"{BaseUrl}/api/commands", command);
+            var response = await data.Content.ReadFromJsonAsync<ServiceResponse<Guid>>();
+            return response!;
+>>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
         }
     }
 }
