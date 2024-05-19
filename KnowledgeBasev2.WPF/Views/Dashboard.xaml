@@ -6,11 +6,7 @@
              xmlns:local="clr-namespace:KnowledgeBasev2.WPF.Views"
              xmlns:components="clr-namespace:KnowledgeBasev2.WPF.Components"
              mc:Ignorable="d" 
-<<<<<<< HEAD
              d:DesignHeight="650" d:DesignWidth="800">
-=======
-             d:DesignHeight="450" d:DesignWidth="800">
->>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -18,23 +14,19 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-<<<<<<< HEAD
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-=======
             <RowDefinition/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
->>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
+                <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
         <components:CommandOverallInfo Grid.Column="0"/>
         <components:CodeOverallInfo Grid.Column="1"/>
         <components:DocumentationOverallInfo Grid.Column="2"/>
-<<<<<<< HEAD
         <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Grid.Resources>
                 <Style TargetType="ListView">
@@ -73,15 +65,13 @@
             <ListView Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Systems}" Background="LightGray" />
             <ListView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Techs}" Background="LightGray" />
             <ListView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Langs}"  Background="LightGray"/>
-            
+
         </Grid>
-=======
         <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">Systems</TextBlock>
         <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">Technologies</TextBlock>
         <TextBlock Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">Languages</TextBlock>
         <ListView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Systems}" />
         <ListView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Techs}" />
         <ListView Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding Langs}" />
->>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
     </Grid>
 </UserControl>

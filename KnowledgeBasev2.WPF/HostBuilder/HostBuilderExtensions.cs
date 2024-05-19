@@ -4,12 +4,6 @@ using KnowledgeBasev2.WPF.Services;
 using KnowledgeBasev2.WPF.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.RightsManagement;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KnowledgeBasev2.WPF.HostBuilder
 {
@@ -52,14 +46,10 @@ namespace KnowledgeBasev2.WPF.HostBuilder
                 services.AddSingleton<NavigationService<CommandPageViewModel>>();
                 services.AddSingleton<NavigationService<CodePageViewModel>>();
                 services.AddSingleton<NavigationService<DocumentationPageViewModel>>();
-                //  -----
                 services.AddSingleton<CommandService>();
                 services.AddSingleton<CodeService>();
                 services.AddSingleton<DocumentationService>();
-<<<<<<< HEAD
                 services.AddSingleton<DefaultInfoService>();
-=======
->>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
             });
             return hostBuilder;
         }

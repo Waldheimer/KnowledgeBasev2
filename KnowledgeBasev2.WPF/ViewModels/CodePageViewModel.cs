@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-<<<<<<< HEAD
 using KnowledgeBasev2.Domain.DTOs;
 using KnowledgeBasev2.WPF.Manager;
 using MdXaml;
@@ -28,7 +27,7 @@ namespace KnowledgeBasev2.WPF.ViewModels
         [ObservableProperty]
         private int? selectedIndex;
 
-        
+
         private IEnumerable<string> categories;
         public IEnumerable<string> Categories => categories;
 
@@ -47,7 +46,7 @@ namespace KnowledgeBasev2.WPF.ViewModels
 
         private string readText(string file)
         {
-            if(File.Exists(file))
+            if (File.Exists(file))
             {
                 return File.ReadAllText(file);
             }
@@ -56,17 +55,5 @@ namespace KnowledgeBasev2.WPF.ViewModels
                 return file;
             }
         }
-
-=======
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-namespace KnowledgeBasev2.WPF.ViewModels
-{
-    public class CodePageViewModel : ObservableRecipient
-    {
->>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
     }
 }

@@ -8,11 +8,7 @@
         xmlns:views="clr-namespace:KnowledgeBasev2.WPF.Views"
         xmlns:components="clr-namespace:KnowledgeBasev2.WPF.Components"
         mc:Ignorable="d"
-<<<<<<< HEAD
         Title="MainWindow" Height="900" Width="1600" Background="LightGray" SizeChanged="Window_SizeChanged">
-=======
-        Title="MainWindow" Height="900" Width="1600" Background="LightGray">
->>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
     <Window.Resources>
         <Style TargetType="Border">
             <Setter Property="BorderBrush" Value="SteelBlue"/>
@@ -30,24 +26,21 @@
             <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-<<<<<<< HEAD
         <!-- Size Info -->
         <StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="5">Screen Width : </TextBlock>
+                <TextBlock Margin="5">Screen Width :</TextBlock>
                 <TextBlock Margin="5" Text="{Binding ScreenWidth}"/>
                 <TextBlock Margin="5">App Width :</TextBlock>
                 <TextBlock Margin="5" Text="{Binding AppWidth}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="5">Screen Height : </TextBlock>
+                <TextBlock Margin="5">Screen Height :</TextBlock>
                 <TextBlock Margin="5" Text="{Binding ScreenHeight}"/>
                 <TextBlock Margin="5">App Height :</TextBlock>
                 <TextBlock Margin="5" Text="{Binding AppHeight}"/>
             </StackPanel>
         </StackPanel>
-=======
->>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
         <!-- ************************** -->
         <!-- MainMenu -->
         <!-- ************************** -->

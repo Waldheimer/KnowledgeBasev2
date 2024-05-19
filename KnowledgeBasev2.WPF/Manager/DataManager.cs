@@ -10,10 +10,7 @@ namespace KnowledgeBasev2.WPF.Manager
         private readonly CommandService _commandService;
         private readonly CodeService _codeService;
         private readonly DocumentationService _documentationService;
-<<<<<<< HEAD
         private readonly DefaultInfoService _defaultInfoService;
-=======
->>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
 
         [ObservableProperty]
         private ObservableCollection<ReadUpdateDTO>? commands;
@@ -28,7 +25,6 @@ namespace KnowledgeBasev2.WPF.Manager
         private ObservableCollection<string>? techs;
         [ObservableProperty]
         private ObservableCollection<string>? langs;
-<<<<<<< HEAD
 
         [ObservableProperty]
         private Dictionary<string,int>? commandSystemsCount;
@@ -52,26 +48,16 @@ namespace KnowledgeBasev2.WPF.Manager
                             CodeService codeService, 
                             DocumentationService documentationService,
                             DefaultInfoService defaultInfoService)
-=======
-        public DataManager( CommandService commandService, 
-                            CodeService codeService, 
-                            DocumentationService documentationService)
->>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
         {
             _commandService = commandService;
             _codeService = codeService;
             _documentationService = documentationService;
-<<<<<<< HEAD
             _defaultInfoService = defaultInfoService;
-=======
-
->>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
 
         }
 
         public async void PreLoadData()
         {
-<<<<<<< HEAD
             Commands = new ObservableCollection<ReadUpdateDTO>(await _commandService.GetAsync());
             Codes = new ObservableCollection<ReadUpdateDTO>(await _codeService.GetAsync());
             Documentations = new ObservableCollection<ReadUpdateDTO>(await _documentationService.GetAsync());
@@ -139,11 +125,10 @@ namespace KnowledgeBasev2.WPF.Manager
         public async Task<Guid> UpdateCommand(ReadUpdateDTO command)
         {
             Guid id = (await _commandService.UpdateAsync(command)).Data;
-            ReadUpdateDTO? cmd = this.Commands!.Where(c => c.Id == command.Id).FirstOrDefault();
-            this.Commands!.Remove(cmd!);
+            ReadUpdateDTO? comd = this.Commands!.Where(c => c.Id == command.Id).FirstOrDefault();
+            this.Commands!.Remove(comd!);
             Commands.Add(command);
             return id;
-=======
             var cmds = await _commandService.GetAsync();
             Commands = new ObservableCollection<ReadUpdateDTO>(cmds);
             Codes = new ObservableCollection<ReadUpdateDTO>(await _codeService.GetAsync());
@@ -160,7 +145,6 @@ namespace KnowledgeBasev2.WPF.Manager
                 (from cmd in Commands select cmd.Lang).
                 Union(from cd in Codes select cd.Lang).
                 Union(from docs in Documentations select docs.Lang).Distinct());
->>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
         }
     }
 }

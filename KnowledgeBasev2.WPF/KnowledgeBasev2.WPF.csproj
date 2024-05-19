@@ -11,10 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-<<<<<<< HEAD
     <PackageReference Include="MdXaml" Version="1.27.0" />
-=======
->>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
   </ItemGroup>
 

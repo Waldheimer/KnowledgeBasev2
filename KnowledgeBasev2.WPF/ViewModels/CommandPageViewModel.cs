@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-<<<<<<< HEAD
 using CommunityToolkit.Mvvm.Input;
 using KnowledgeBasev2.Domain.DTOs;
 using KnowledgeBasev2.WPF.Manager;
@@ -67,7 +66,7 @@ namespace KnowledgeBasev2.WPF.ViewModels
                 "Text/Code", "System", "Technology", "Language", "Description"
             };
         }
-        
+
         //  ***** Reads the Text-Attribute of the ReadUpdateDTO
         //  ***** and converts it into inline CodeBlock for Markdown
         private string readText(string text)
@@ -105,7 +104,7 @@ namespace KnowledgeBasev2.WPF.ViewModels
         {
             IsCreateNewActive = !IsCreateNewActive;
         }
-        
+
         [RelayCommand]
         public async Task CreateNew()
         {
@@ -164,11 +163,11 @@ namespace KnowledgeBasev2.WPF.ViewModels
         public async Task DeleteCurrent()
         {
             var confirmation = MessageBoxResult.No;
-            if(SelectedCommand != null)
+            if (SelectedCommand != null)
             {
                 confirmation = MessageBox.Show("Are you sure ?", "Deleting Command", MessageBoxButton.YesNo);
             }
-            if(confirmation == MessageBoxResult.Yes && _dataManager!.Commands != null)
+            if (confirmation == MessageBoxResult.Yes && _dataManager!.Commands != null)
             {
                 Guid id = await _dataManager.DeleteCommand(SelectedCommand!);
                 _dataManager.Commands.Remove(SelectedCommand!);
@@ -185,29 +184,30 @@ namespace KnowledgeBasev2.WPF.ViewModels
             {
                 AllCommands = _dataManager.Commands; return;
             }
-            switch (SearchCategory) {
+            switch (SearchCategory)
+            {
                 case "Text/Code":
-                    AllCommands = new ObservableCollection<ReadUpdateDTO>(AllCommands.Where(c => c.Text.ToLower().Contains(SearchText.ToLower()) 
-                                                                                            || SearchText.ToLower().Contains(c.Text.ToLower()))); 
+                    AllCommands = new ObservableCollection<ReadUpdateDTO>(AllCommands.Where(c => c.Text.ToLower().Contains(SearchText.ToLower())
+                                                                                            || SearchText.ToLower().Contains(c.Text.ToLower())));
                     break;
                 case "System":
-                    AllCommands = new ObservableCollection<ReadUpdateDTO>(AllCommands.Where(c => c.System.ToLower().Contains(SearchText.ToLower()) 
+                    AllCommands = new ObservableCollection<ReadUpdateDTO>(AllCommands.Where(c => c.System.ToLower().Contains(SearchText.ToLower())
                                                                                             || SearchText.ToLower().Contains(c.System.ToLower())));
                     break;
                 case "Technology":
-                    AllCommands = new ObservableCollection<ReadUpdateDTO>(AllCommands.Where(c => c.Tech.ToLower().Contains(SearchText.ToLower()) 
+                    AllCommands = new ObservableCollection<ReadUpdateDTO>(AllCommands.Where(c => c.Tech.ToLower().Contains(SearchText.ToLower())
                                                                                             || SearchText.ToLower().Contains(c.Tech.ToLower())));
                     break;
                 case "Language":
-                    AllCommands = new ObservableCollection<ReadUpdateDTO>(AllCommands.Where(c => c.Lang.ToLower().Contains(SearchText.ToLower()) 
+                    AllCommands = new ObservableCollection<ReadUpdateDTO>(AllCommands.Where(c => c.Lang.ToLower().Contains(SearchText.ToLower())
                                                                                             || SearchText.ToLower().Contains(c.Lang.ToLower())));
                     break;
                 case "Description":
-                    AllCommands = new ObservableCollection<ReadUpdateDTO>(AllCommands.Where(c => c.Description.ToLower().Contains(SearchText.ToLower()) 
+                    AllCommands = new ObservableCollection<ReadUpdateDTO>(AllCommands.Where(c => c.Description.ToLower().Contains(SearchText.ToLower())
                                                                                             || SearchText.ToLower().Contains(c.Description.ToLower())));
                     break;
                 default:
-                    
+
                     break;
             }
         }
@@ -217,17 +217,5 @@ namespace KnowledgeBasev2.WPF.ViewModels
             SearchText = string.Empty;
             SearchFor();
         }
-=======
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KnowledgeBasev2.WPF.ViewModels
-{
-    public class CommandPageViewModel : ObservableRecipient
-    {
->>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
     }
 }

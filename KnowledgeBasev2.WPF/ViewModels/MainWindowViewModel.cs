@@ -1,25 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-<<<<<<< HEAD
 using CommunityToolkit.Mvvm.Messaging;
 using KnowledgeBasev2.WPF.Manager;
 using KnowledgeBasev2.WPF.Messages;
 using KnowledgeBasev2.WPF.Services;
-using System.Windows;
-=======
-using KnowledgeBasev2.WPF.Manager;
-using KnowledgeBasev2.WPF.Services;
->>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
 
 namespace KnowledgeBasev2.WPF.ViewModels
 {
     public partial class MainWindowViewModel : ObservableRecipient
     {
         private readonly NavigationManager _navigationManager;
-<<<<<<< HEAD
         private readonly DataManager _dataManager;
-=======
->>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
 
         private readonly NavigationService<DashboardViewModel> _dashboardNavigator;
         private readonly NavigationService<CommandPageViewModel> _commandNavigator;
@@ -30,10 +21,7 @@ namespace KnowledgeBasev2.WPF.ViewModels
 
         [ObservableProperty]
         private int activeView = 0;
-
-<<<<<<< HEAD
         
-
         public double ScreenWidth => System.Windows.SystemParameters.PrimaryScreenWidth;
         public double ScreenHeight => System.Windows.SystemParameters.PrimaryScreenHeight;
         [ObservableProperty]
@@ -41,25 +29,18 @@ namespace KnowledgeBasev2.WPF.ViewModels
         [ObservableProperty]
         private double appHeight;
 
-=======
->>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
         public MainWindowViewModel(NavigationService<DashboardViewModel> dashboardNavigator, 
             NavigationService<CommandPageViewModel> commandNavigator, 
             NavigationService<CodePageViewModel> codeNavigator, 
             NavigationService<DocumentationPageViewModel> documentationNavigator,
-<<<<<<< HEAD
             NavigationManager navigationManager,
             DataManager dataManager)
-=======
-            NavigationManager navigationManager)
->>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
         {
             _dashboardNavigator = dashboardNavigator;
             _commandNavigator = commandNavigator;
             _codeNavigator = codeNavigator;
             _documentationNavigator = documentationNavigator;
             _navigationManager = navigationManager;
-<<<<<<< HEAD
             _dataManager = dataManager;
 
             _navigationManager.CurrentViewModelChanged += OnCurrentViewModelChanged;
@@ -76,10 +57,8 @@ namespace KnowledgeBasev2.WPF.ViewModels
         private void OnFinishedLoadingData()
         {
             NavigateToDashboard();
-=======
 
             _navigationManager.CurrentViewModelChanged += OnCurrentViewModelChanged;
->>>>>>> a52c645db36ba9ff1941710d4786694c0054c198
         }
 
         private void OnCurrentViewModelChanged()
