@@ -4,7 +4,6 @@ using KnowledgeBasev2.Domain.DTOs;
 using KnowledgeBasev2.Domain.Entities;
 using KnowledgeBasev2.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace KnowledgeBasev2.Infrastructure.ContractImplementations
 {

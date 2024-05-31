@@ -37,9 +37,9 @@
             <ListView Grid.Column="2" Grid.Row="1" ItemsSource="{Binding CommandLangCount}" Background="LightGray"
                       Style="{StaticResource LV_Style1}"/>
         </Grid>
-        <StackPanel>
+        <!--<StackPanel>
             <TextBlock TextAlignment="Center" FontSize="24" FontWeight="Bold" Padding="10">COMMANDS</TextBlock>
             <TextBlock TextAlignment="Center" FontSize="48" FontWeight="Black" Padding="25" Text="{Binding CommandCount}"></TextBlock>
-        </StackPanel>
+        </StackPanel>-->
     </StackPanel>
 </UserControl>
